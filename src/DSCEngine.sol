@@ -98,7 +98,11 @@ contract DSCEngine is ReentrancyGuard {
     /////////////////////////
     //   Functions        //
     ///////////////////////
-    constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses, address dscAddress) {
+    constructor(
+        address[] memory tokenAddresses, // las addresses de los tokens aceptados para el swap
+        address[] memory priceFeedAddresses, // el precio de esos tokens
+        address dscAddress // la address del token
+        ) {
         if (tokenAddresses.length != priceFeedAddresses.length) {
             revert DSCEngine__TokenAddressesAndPriceFeedAddressesAmountsDontMatch();
         }
@@ -153,7 +157,7 @@ contract DSCEngine is ReentrancyGuard {
         _revertIfHealthFactorIsBroken(msg.sender);
         bool minted = i_dsc.mint(msg.sender, amountDscToMint);
 
-        if (minted != true) {
+        if (!minted) {
             revert DSCEngine__MintFailed();
         }
     }
