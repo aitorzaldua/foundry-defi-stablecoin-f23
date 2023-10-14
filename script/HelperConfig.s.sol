@@ -6,12 +6,11 @@ import {MockV3Aggregator} from "../test/mocks/MockV3Aggregator.sol";
 import {ERC20Mock} from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
 
 contract HelperConfig is Script {
-
     // Para desplegar en Sepolia:
     // Se necesita las address de los tokens weth y wbtc en esa network
     // las addresses de los precios de los tokens están en:
     // https://docs.chain.link/data-feeds/price-feeds/addresses#Sepolia%20Testnet
-     struct NetworkConfig {
+    struct NetworkConfig {
         address wethUsdPriceFeed;
         address wbtcUsdPriceFeed;
         address weth;
@@ -23,7 +22,6 @@ contract HelperConfig is Script {
     int256 public constant ETH_USD_PRICE = 2000e8;
     int256 public constant BTC_USD_PRICE = 1000e8;
     uint256 public DEFAULT_ANVIL_KEY = 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
-
 
     NetworkConfig public activeNetworkConfig;
 
@@ -38,7 +36,7 @@ contract HelperConfig is Script {
     // las addresses de los precios de los tokens están en:
     // https://docs.chain.link/data-feeds/price-feeds/addresses#Sepolia%20Testnet
     // las addresses de weth y wbtc están en etherscan
- function getSepoliaEthConfig() public view returns (NetworkConfig memory) {
+    function getSepoliaEthConfig() public view returns (NetworkConfig memory) {
         return NetworkConfig({
             wethUsdPriceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306,
             wbtcUsdPriceFeed: 0x1b44F3514812d835EB1BDB0acB33d3fA3351Ee43,
@@ -47,7 +45,6 @@ contract HelperConfig is Script {
             deployerKey: vm.envUint("PRIVATE_KEY")
         });
     }
-
 
     // https://book.getfoundry.sh/reference/anvil/
     function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
@@ -78,6 +75,4 @@ contract HelperConfig is Script {
             deployerKey: DEFAULT_ANVIL_KEY
         });
     }
-
-
 }
