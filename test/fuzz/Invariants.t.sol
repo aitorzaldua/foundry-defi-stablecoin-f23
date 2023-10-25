@@ -1,4 +1,4 @@
-/* // SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.21;
 
 import {Test, console} from "forge-std/Test.sol";
@@ -15,7 +15,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  * What are our invariants?
  * 1.- El total supply de la stable coin DSC siempre debe ser menor que el valor total del collateral.
  * 2.- Las funciones getter nunca deben revert -> evergreen invariant
- 
+ */
 
 contract OpenInvariantsTest is StdInvariant, Test {
     DeployDSC deployer;
@@ -31,7 +31,7 @@ contract OpenInvariantsTest is StdInvariant, Test {
         /*
          * La función run recibe como parámetros...
          *  function run() external returns (DecentralizedStableCoin, DSCEngine, HelperConfig) {...
-         
+         */
         (dsc, dsce, config) = deployer.run();
         targetContract(address(dsce));
 
@@ -44,7 +44,7 @@ contract OpenInvariantsTest is StdInvariant, Test {
         /*
          * 1.- get the value of all tyhe collateral in the protocol
          * 2.- compare it to all the debt
-		 
+		 */
         
         // 1.- Se obtienen las cantidades en el protocolo
         uint256 totalSupply = dsc.totalSupply();
@@ -63,6 +63,4 @@ contract OpenInvariantsTest is StdInvariant, Test {
         // 2.- finalmente se crea la comparativa para que ejecute el invariant
         assert(wethValue + wbtcValue >= totalSupply);
     }
-} */
-
-
+}
